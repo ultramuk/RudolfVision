@@ -361,3 +361,28 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Build output
+bin/
+obj/
+build/
+
+# User-specific
+.vs/
+*.user
+*.suo
+
+# DLLs and intermediate outputs
+*.dll
+*.lib
+*.pdb
+
+# CMake (if used)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+# Others
+*.log
+*.DS_Store
+*.ipch
