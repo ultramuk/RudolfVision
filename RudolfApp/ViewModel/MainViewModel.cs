@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows.Input;
 using System.Windows.Media;
 using OpenCvSharp;
 using RudolfApp.Utils;
@@ -8,13 +9,6 @@ namespace RudolfApp.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         private ImageSource _inputImage;
         public ImageSource InputImage
         {
@@ -29,9 +23,26 @@ namespace RudolfApp.ViewModel
             }
         }
 
+        public ICommand LoadSampleCommand { get;  }
+        public ICommand StartWebcamCommand { get;  }
+        public ICommand StopWebcamCommand { get; }
+
+        private readonly WebcamService _webcamService;
+
         public MainViewModel()
         {
-            LoadSampleImage();
+            _webcamService = new WebcamService();
+            _webcamService.OnFrameReceived = image =>
+            {
+                System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                {
+                    InputImage = image;
+                });
+            };
+
+            LoadSampleCommand = new RelayCommand(_ => LoadSampleImage());
+            StartWebcamCommand = new RelayCommand(_ => _webcamService.Start());
+            StopWebcamCommand = new RelayCommand(_ => _webcamService.Stop());
         }
 
         private void LoadSampleImage()
@@ -48,7 +59,7 @@ namespace RudolfApp.ViewModel
 
                 Console.WriteLine("이미지 파일 발견: " + imagePath);
 
-                Mat mat = Cv2.ImRead(imagePath);
+                var mat = new OpenCvSharp.Mat(imagePath);
                 InputImage = ImageConverter.MatToImageSource(mat);
             }
             catch (Exception ex)
@@ -56,5 +67,9 @@ namespace RudolfApp.ViewModel
                 Console.WriteLine("이미지 로딩 실패: " + ex.Message);
             }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

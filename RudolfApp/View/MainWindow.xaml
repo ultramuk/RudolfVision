@@ -8,7 +8,20 @@
         <vm:MainViewModel/>
     </Window.DataContext>
 
-    <Grid>
-        <Image Source="{Binding InputImage}" Stretch="Uniform"/>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+            <Button Content="샘플 이미지 로드" Command="{Binding LoadSampleCommand}" Margin="5"/>
+            <Button Content="웹캠 시작" Command="{Binding StartWebcamCommand}" Margin="5"/>
+            <Button Content="웹캠 정지" Command="{Binding StopWebcamCommand}" Margin="5"/>
+        </StackPanel>
+        
+        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Image Source="{Binding InputImage}" Width="640" Height="480" Stretch="Uniform"/>
+        </Border>
     </Grid>
 </Window>
