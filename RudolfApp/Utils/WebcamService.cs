@@ -41,33 +41,52 @@ namespace RudolfApp.Utils
             _captureTask = Task.Run(() =>
             {
                 using var mat = new Mat();
+                int consecutiveFailures = 0;
+                const int maxAllowedFailures = 30;
+
                 while (!_cts.IsCancellationRequested)
                 {
-                    _capture.Read(mat);
-                    if (!mat.Empty())
+                    try
                     {
-                        var matCopy = mat.Clone(); // 안전 복사
-
-                        Application.Current.Dispatcher.Invoke(() =>
+                        _capture.Read(mat);
+                        if (!mat.Empty())
                         {
-                            try
-                            {
-                                var bitmap = BitmapSource.Create(
-                                    matCopy.Width, matCopy.Height,
-                                    96, 96, // dpi
-                                    System.Windows.Media.PixelFormats.Bgr24,
-                                    null,
-                                    matCopy.Data,
-                                    (int)(matCopy.Step() * matCopy.Height),
-                                    (int)(matCopy.Step()));
+                            consecutiveFailures = 0;
 
-                                OnFrameReceived?.Invoke(bitmap);
-                            }
-                            catch (Exception ex)
+                            var matCopy = mat.Clone(); // 안전 복사
+                            Application.Current.Dispatcher.Invoke(() =>
                             {
-                                Console.WriteLine("프레임 처리 중 오류: " + ex.Message);
+                                try
+                                {
+                                    var bitmap = BitmapSource.Create(
+                                        matCopy.Width, matCopy.Height,
+                                        96, 96, // dpi
+                                        System.Windows.Media.PixelFormats.Bgr24,
+                                        null,
+                                        matCopy.Data,
+                                        (int)(matCopy.Step() * matCopy.Height),
+                                        (int)(matCopy.Step()));
+
+                                    OnFrameReceived?.Invoke(bitmap);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine("프레임 처리 중 오류: " + ex.Message);
+                                }
+                            });
+                        }
+                        else
+                        {
+                            consecutiveFailures++;
+                            if (consecutiveFailures == maxAllowedFailures)
+                            {
+                                Console.WriteLine("지속적 프레임 수신 실패 (카메라 연결 확인)");
                             }
-                        });
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine("프레임 수신 중 예외 발생: " + ex.Message);
                     }
 
                     Thread.Sleep(30); // 약 30 FPS
