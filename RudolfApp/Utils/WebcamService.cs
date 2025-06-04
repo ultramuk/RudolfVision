@@ -17,14 +17,20 @@ namespace RudolfApp.Utils
 
         public Action<ImageSource> OnFrameReceived;
 
+        private bool _isRunning = false;
+
         public void Start()
         {
+            if (_isRunning) return;
+            _isRunning = true;
+
             _capture = new VideoCapture();
             _capture.Open(0, VideoCaptureAPIs.DSHOW);
 
             if(!_capture.IsOpened())
             {
                 Console.WriteLine("카메라 열기 실패");
+                _isRunning = false;
                 return;
             }
 
@@ -71,6 +77,9 @@ namespace RudolfApp.Utils
 
         public void Stop()
         {
+            if (!_isRunning) return;
+            _isRunning = false;
+
             _cts?.Cancel();
 
             try
