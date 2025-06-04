@@ -49,6 +49,7 @@ namespace RudolfApp.ViewModel
         {
             try
             {
+                _webcamService.Stop();
                 string imagePath = System.IO.Path.Combine(AppContext.BaseDirectory, "Assets", "sample.png");
 
                 if(!System.IO.File.Exists(imagePath))
