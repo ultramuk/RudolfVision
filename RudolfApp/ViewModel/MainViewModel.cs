@@ -61,6 +61,11 @@ namespace RudolfApp.ViewModel
                 Console.WriteLine("이미지 파일 발견: " + imagePath);
 
                 var mat = new OpenCvSharp.Mat(imagePath);
+
+                RudolfApp.Services.Interop.RudolfInterop.Initialize();
+                RudolfApp.Services.Interop.RudolfInterop.ProcessImage(mat.Data, mat.Width, mat.Height, mat.Channels());
+                RudolfApp.Services.Interop.RudolfInterop.Release();
+
                 InputImage = ImageConverter.MatToImageSource(mat);
             }
             catch (Exception ex)
