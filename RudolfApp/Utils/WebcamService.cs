@@ -1,11 +1,13 @@
 ﻿using OpenCvSharp;
 using System;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using RudolfApp.Services.Interop;
 
 namespace RudolfApp.Utils
 {
@@ -52,6 +54,8 @@ namespace RudolfApp.Utils
                         if (!mat.Empty())
                         {
                             consecutiveFailures = 0;
+
+                            RudolfInterop.ProcessImage(mat.Data, mat.Width, mat.Height, mat.Channels());
 
                             var matCopy = mat.Clone(); // 안전 복사
                             Application.Current.Dispatcher.Invoke(() =>
