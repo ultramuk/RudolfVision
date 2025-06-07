@@ -1,0 +1,9 @@
+syntax = "proto3";
+package rudolf;
+
+message FaceResult {
+  float nose_x = 1;
+  float nose_y = 2;
+  float confidence = 3;
+  bool face_found = 4;
+}
