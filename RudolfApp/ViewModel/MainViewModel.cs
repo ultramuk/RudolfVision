@@ -1,9 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
 using OpenCvSharp;
 using RudolfApp.Utils;
+using RudolfApp.Services.Interop;
 
 namespace RudolfApp.ViewModel
 {
@@ -23,14 +26,16 @@ namespace RudolfApp.ViewModel
             }
         }
 
-        public ICommand LoadSampleCommand { get;  }
-        public ICommand StartWebcamCommand { get;  }
+        public ICommand LoadSampleCommand { get; }
+        public ICommand StartWebcamCommand { get; }
         public ICommand StopWebcamCommand { get; }
 
         private readonly WebcamService _webcamService;
 
         public MainViewModel()
         {
+            RudolfInterop.Initialize();
+
             _webcamService = new WebcamService();
             _webcamService.OnFrameReceived = image =>
             {
@@ -40,19 +45,20 @@ namespace RudolfApp.ViewModel
                 });
             };
 
-            LoadSampleCommand = new RelayCommand(_ => LoadSampleImage());
+            LoadSampleCommand = new AsyncRelayCommand(LoadSampleImageAsync);
             StartWebcamCommand = new RelayCommand(_ => _webcamService.Start());
-            StopWebcamCommand = new RelayCommand(_ => _webcamService.Stop());
+            StopWebcamCommand = new AsyncRelayCommand(_webcamService.StopAsync);
         }
 
-        private void LoadSampleImage()
+        private async Task LoadSampleImageAsync()
         {
             try
             {
-                _webcamService.Stop();
-                string imagePath = System.IO.Path.Combine(AppContext.BaseDirectory, "Assets", "sample.png");
+                await _webcamService.StopAsync();
 
-                if(!System.IO.File.Exists(imagePath))
+                string imagePath = Path.Combine(AppContext.BaseDirectory, "Assets", "sample.png");
+
+                if (!File.Exists(imagePath))
                 {
                     Console.WriteLine("이미지 파일이 없습니다: " + imagePath);
                     return;
@@ -60,18 +66,26 @@ namespace RudolfApp.ViewModel
 
                 Console.WriteLine("이미지 파일 발견: " + imagePath);
 
-                var mat = new OpenCvSharp.Mat(imagePath);
+                using var mat = new Mat(imagePath, ImreadModes.Color);
+                if (mat.Empty())
+                {
+                    Console.WriteLine("이미지 로드 실패: 빈 이미지입니다.");
+                    return;
+                }
 
-                RudolfApp.Services.Interop.RudolfInterop.Initialize();
-                RudolfApp.Services.Interop.RudolfInterop.ProcessImage(mat.Data, mat.Width, mat.Height, mat.Channels());
-                RudolfApp.Services.Interop.RudolfInterop.Release();
-
+                RudolfInterop.ProcessImage(mat.Data, mat.Width, mat.Height, mat.Channels());
                 InputImage = ImageConverter.MatToImageSource(mat);
             }
             catch (Exception ex)
             {
                 Console.WriteLine("이미지 로딩 실패: " + ex.Message);
             }
+        }
+
+        public async Task CleanupAsync()
+        {
+            await _webcamService.StopAsync();
+            RudolfInterop.Release();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

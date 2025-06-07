@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{362b73db-a7a0-4ecf-b4f8-b182f043f1ca}</ProjectGuid>
+    <ProjectGuid>{4fa1d524-feb9-47a7-a2fe-1088ecfe3848}</ProjectGuid>
     <RootNamespace>RudolfLib</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -106,26 +106,29 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;RUDOLFLIB_EXPORTS;_WINDOWS;_USRDLL;GLOG_NO_ABBREVIATED_SEVERITIES;GLOG_USE_STATIC_LIBS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;RUDOLFLIB_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\include;C:\protobuf-3.21.12\include;$(ProjectDir)include\;$(ProjectDir)generated\;$(SolutionDir)3rdparty\opencv\include;$(SolutionDir)3rdparty\mediapipe;$(SolutionDir)3rdparty\abseil;$(SolutionDir)3rdparty\protobuf\install\include;$(SolutionDir)3rdparty\eigen;$(SolutionDir)3rdparty\glog\include</AdditionalIncludeDirectories>
-      <DiagnosticsFormat>Caret</DiagnosticsFormat>
+      <AdditionalIncludeDirectories>C:\Users\MUKS\source\repos\RudolfVision\3rdparty\opencv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalLibraryDirectories>C:\lib;C:\protobuf-3.21.12\lib;$(SolutionDir)3rdparty\opencv\x64\vc15\lib;$(SolutionDir)3rdparty\protobuf\build\Release\lib;$(SolutionDir)3rdparty\glog\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);opencv_world455d.lib;libprotobuf.lib;glog.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\MUKS\source\repos\RudolfVision\3rdparty\opencv\x64\vc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world455d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y /D "$(TargetPath)" "$(SolutionDir)RudolfApp\bin\$(Configuration)\\net8.0-windows\"
-
+      <Command>xcopy /Y /D "$(TargetPath)" "$(SolutionDir)RudolfApp\bin\$(Configuration)\net8.0-windows\"
 xcopy /Y /D "$(SolutionDir)3rdparty\opencv\x64\vc15\bin\*.dll" "$(SolutionDir)RudolfApp\bin\$(Configuration)\net8.0-windows\"
-</Command>
+xcopy /Y /D "$(SolutionDir)RudolfLib\Assets\haarcascade_frontalface_default.xml" "$(SolutionDir)RudolfApp\bin\$(Configuration)\net8.0-windows\"
+xcopy /Y /D "$(SolutionDir)RudolfLib\Assets\rudolf_nose.png" "$(SolutionDir)RudolfApp\bin\$(Configuration)\net8.0-windows\"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -137,49 +140,40 @@ xcopy /Y /D "$(SolutionDir)3rdparty\opencv\x64\vc15\bin\*.dll" "$(SolutionDir)Ru
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdparty\opencv\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\MUKS\source\repos\RudolfVision\3rdparty\opencv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalLibraryDirectories>$(SolutionDir)3rdparty\opencv\x654\vc15\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);opencv_world455.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\MUKS\source\repos\RudolfVision\3rdparty\opencv\x64\vc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world455.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y /D "$(TargetPath)" "$(SolutionDir)RudolfApp\bin\$(Configuration)\net8.0-windows\"
+xcopy /Y /D "$(SolutionDir)3rdparty\opencv\x64\vc15\bin\*.dll" "$(SolutionDir)RudolfApp\bin\$(Configuration)\net8.0-windows\"
+xcopy /Y /D "$(SolutionDir)RudolfLib\Assets\haarcascade_frontalface_default.xml" "$(SolutionDir)RudolfApp\bin\$(Configuration)\net8.0-windows\"
+xcopy /Y /D "$(SolutionDir)RudolfLib\Assets\rudolf_nose.png" "$(SolutionDir)RudolfApp\bin\$(Configuration)\net8.0-windows\"</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
-    <ClInclude Include="generated\FaceResult.pb.h" />
-    <ClInclude Include="generated\mediapipe\framework\graph_runtime_info.pb.h" />
-    <ClInclude Include="generated\mediapipe\framework\calculator.pb.h" />
-    <ClInclude Include="generated\mediapipe\framework\calculator_options.pb.h" />
-    <ClInclude Include="generated\graph_runtime_info.pb.h" />
-    <ClInclude Include="generated\mediapipe\framework\mediapipe_options.pb.h" />
-    <ClInclude Include="generated\mediapipe\framework\packet_factory.pb.h" />
-    <ClInclude Include="generated\mediapipe\framework\packet_generator.pb.h" />
-    <ClInclude Include="generated\mediapipe\framework\status_handler.pb.h" />
-    <ClInclude Include="generated\mediapipe\framework\stream_handler.pb.h" />
-    <ClInclude Include="include\RudolfLib.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="RudolfLib.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="generated\calculator.pb.cc" />
-    <ClCompile Include="generated\mediapipe\framework\calculator_options.pb.cc" />
-    <ClCompile Include="generated\graph_runtime_info.pb.cc" />
-    <ClCompile Include="generated\mediapipe\framework\mediapipe_options.pb.cc" />
-    <ClCompile Include="generated\mediapipe\framework\packet_factory.pb.cc" />
-    <ClCompile Include="generated\mediapipe\framework\packet_generator.pb.cc" />
-    <ClCompile Include="generated\mediapipe\framework\status_handler.pb.cc" />
-    <ClCompile Include="generated\mediapipe\framework\stream_handler.pb.cc" />
-    <ClCompile Include="src\dllmain.cpp" />
-    <ClCompile Include="generated\FaceResult.pb.cc" />
-    <ClCompile Include="generated\graph_runtime_info.pb.cc" />
-    <ClCompile Include="src\RudolfLib.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="CMakeLists.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="proto\FaceResult.proto" />
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="RudolfLib.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

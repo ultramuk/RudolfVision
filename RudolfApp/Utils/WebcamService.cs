@@ -1,7 +1,5 @@
 ﻿using OpenCvSharp;
 using System;
-using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -29,7 +27,7 @@ namespace RudolfApp.Utils
             _capture = new VideoCapture();
             _capture.Open(0, VideoCaptureAPIs.DSHOW);
 
-            if(!_capture.IsOpened())
+            if (!_capture.IsOpened())
             {
                 Console.WriteLine("카메라 열기 실패");
                 _isRunning = false;
@@ -57,15 +55,15 @@ namespace RudolfApp.Utils
 
                             RudolfInterop.ProcessImage(mat.Data, mat.Width, mat.Height, mat.Channels());
 
-                            var matCopy = mat.Clone(); // 안전 복사
+                            var matCopy = mat.Clone();
                             Application.Current.Dispatcher.Invoke(() =>
                             {
                                 try
                                 {
                                     var bitmap = BitmapSource.Create(
                                         matCopy.Width, matCopy.Height,
-                                        96, 96, // dpi
-                                        System.Windows.Media.PixelFormats.Bgr24,
+                                        96, 96,
+                                        PixelFormats.Bgr24,
                                         null,
                                         matCopy.Data,
                                         (int)(matCopy.Step() * matCopy.Height),
@@ -88,17 +86,17 @@ namespace RudolfApp.Utils
                             }
                         }
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Console.WriteLine("프레임 수신 중 예외 발생: " + ex.Message);
                     }
 
-                    Thread.Sleep(30); // 약 30 FPS
+                    Thread.Sleep(30);
                 }
             });
         }
 
-        public void Stop()
+        public async Task StopAsync()
         {
             if (!_isRunning) return;
             _isRunning = false;
@@ -107,7 +105,8 @@ namespace RudolfApp.Utils
 
             try
             {
-                _captureTask?.Wait();
+                if (_captureTask != null)
+                    await _captureTask;
             }
             catch (Exception ex)
             {

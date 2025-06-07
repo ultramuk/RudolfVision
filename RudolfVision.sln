@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36127.28 d17.14
+VisualStudioVersion = 17.14.36127.28
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RudolfApp", "RudolfApp\RudolfApp.csproj", "{3B40072E-59BF-4611-89FC-ADFA4C68ACAB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RudolfLib", "RudolfLib\RudolfLib.vcxproj", "{362B73DB-A7A0-4ECF-B4F8-B182F043F1CA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3rdparty", "3rdparty", "{C8D5274F-AC00-46C7-1F8D-E88E81087A52}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "opencv", "opencv", "{09484B69-D908-4476-A88C-375F19F9AA91}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RudolfLib", "RudolfLib\RudolfLib\RudolfLib.vcxproj", "{4FA1D524-FEB9-47A7-A2FE-1088ECFE3848}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,21 +33,24 @@ Global
 		{3B40072E-59BF-4611-89FC-ADFA4C68ACAB}.Release|x64.Build.0 = Release|Any CPU
 		{3B40072E-59BF-4611-89FC-ADFA4C68ACAB}.Release|x86.ActiveCfg = Release|Any CPU
 		{3B40072E-59BF-4611-89FC-ADFA4C68ACAB}.Release|x86.Build.0 = Release|Any CPU
-		{362B73DB-A7A0-4ECF-B4F8-B182F043F1CA}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{362B73DB-A7A0-4ECF-B4F8-B182F043F1CA}.Debug|Any CPU.Build.0 = Debug|x64
-		{362B73DB-A7A0-4ECF-B4F8-B182F043F1CA}.Debug|x64.ActiveCfg = Debug|x64
-		{362B73DB-A7A0-4ECF-B4F8-B182F043F1CA}.Debug|x64.Build.0 = Debug|x64
-		{362B73DB-A7A0-4ECF-B4F8-B182F043F1CA}.Debug|x86.ActiveCfg = Debug|Win32
-		{362B73DB-A7A0-4ECF-B4F8-B182F043F1CA}.Debug|x86.Build.0 = Debug|Win32
-		{362B73DB-A7A0-4ECF-B4F8-B182F043F1CA}.Release|Any CPU.ActiveCfg = Release|x64
-		{362B73DB-A7A0-4ECF-B4F8-B182F043F1CA}.Release|Any CPU.Build.0 = Release|x64
-		{362B73DB-A7A0-4ECF-B4F8-B182F043F1CA}.Release|x64.ActiveCfg = Release|x64
-		{362B73DB-A7A0-4ECF-B4F8-B182F043F1CA}.Release|x64.Build.0 = Release|x64
-		{362B73DB-A7A0-4ECF-B4F8-B182F043F1CA}.Release|x86.ActiveCfg = Release|Win32
-		{362B73DB-A7A0-4ECF-B4F8-B182F043F1CA}.Release|x86.Build.0 = Release|Win32
+		{4FA1D524-FEB9-47A7-A2FE-1088ECFE3848}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{4FA1D524-FEB9-47A7-A2FE-1088ECFE3848}.Debug|Any CPU.Build.0 = Debug|x64
+		{4FA1D524-FEB9-47A7-A2FE-1088ECFE3848}.Debug|x64.ActiveCfg = Debug|x64
+		{4FA1D524-FEB9-47A7-A2FE-1088ECFE3848}.Debug|x64.Build.0 = Debug|x64
+		{4FA1D524-FEB9-47A7-A2FE-1088ECFE3848}.Debug|x86.ActiveCfg = Debug|Win32
+		{4FA1D524-FEB9-47A7-A2FE-1088ECFE3848}.Debug|x86.Build.0 = Debug|Win32
+		{4FA1D524-FEB9-47A7-A2FE-1088ECFE3848}.Release|Any CPU.ActiveCfg = Release|x64
+		{4FA1D524-FEB9-47A7-A2FE-1088ECFE3848}.Release|Any CPU.Build.0 = Release|x64
+		{4FA1D524-FEB9-47A7-A2FE-1088ECFE3848}.Release|x64.ActiveCfg = Release|x64
+		{4FA1D524-FEB9-47A7-A2FE-1088ECFE3848}.Release|x64.Build.0 = Release|x64
+		{4FA1D524-FEB9-47A7-A2FE-1088ECFE3848}.Release|x86.ActiveCfg = Release|Win32
+		{4FA1D524-FEB9-47A7-A2FE-1088ECFE3848}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{09484B69-D908-4476-A88C-375F19F9AA91} = {C8D5274F-AC00-46C7-1F8D-E88E81087A52}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBAA3CE6-F58B-4D6A-8989-05BBDC98EC28}
