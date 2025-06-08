@@ -7,6 +7,7 @@ using System.Windows.Media;
 using OpenCvSharp;
 using RudolfApp.Utils;
 using RudolfApp.Services.Interop;
+using System.Windows;
 
 namespace RudolfApp.ViewModel
 {
@@ -26,7 +27,22 @@ namespace RudolfApp.ViewModel
             }
         }
 
+        private string _customImagePath;
+        public string CustomImagePath
+        {
+            get => _customImagePath;
+            set
+            {
+                if (_customImagePath != value)
+                {
+                    _customImagePath = value;
+                    OnPropertyChanged(nameof(CustomImagePath));
+                }
+            }
+        }
+
         public ICommand LoadSampleCommand { get; }
+        public ICommand LoadCustomImageCommand { get; }
         public ICommand StartWebcamCommand { get; }
         public ICommand StopWebcamCommand { get; }
 
@@ -46,17 +62,31 @@ namespace RudolfApp.ViewModel
             };
 
             LoadSampleCommand = new AsyncRelayCommand(LoadSampleImageAsync);
+            LoadCustomImageCommand = new AsyncRelayCommand(LoadCustomImageAsync);
             StartWebcamCommand = new RelayCommand(_ => _webcamService.Start());
             StopWebcamCommand = new AsyncRelayCommand(_webcamService.StopAsync);
         }
 
         private async Task LoadSampleImageAsync()
         {
+            await LoadImageAsync(Path.Combine(AppContext.BaseDirectory, "Assets", "sample.png"));
+        }
+        private async Task LoadCustomImageAsync()
+        {
+            if (string.IsNullOrWhiteSpace(CustomImagePath) || !File.Exists(CustomImagePath))
+            {
+                MessageBox.Show("유효한 이미지 경로를 입력하세오.", "오류", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            await LoadImageAsync(CustomImagePath);
+        }
+
+        private async Task LoadImageAsync(string imagePath)
+        {
             try
             {
                 await _webcamService.StopAsync();
-
-                string imagePath = Path.Combine(AppContext.BaseDirectory, "Assets", "sample.png");
 
                 if (!File.Exists(imagePath))
                 {
@@ -81,6 +111,7 @@ namespace RudolfApp.ViewModel
                 Console.WriteLine("이미지 로딩 실패: " + ex.Message);
             }
         }
+
 
         public async Task CleanupAsync()
         {

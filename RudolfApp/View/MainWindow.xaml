@@ -15,6 +15,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+            <TextBlock Text="이미지 경로 입력" Margin="0,0,0,5"/>
+            <TextBox Width="400" Text="{Binding CustomImagePath, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="이미지 로드" Command="{Binding LoadCustomImageCommand}" Margin="5"/>
             <Button Content="샘플 이미지 로드" Command="{Binding LoadSampleCommand}" Margin="5"/>
             <Button Content="웹캠 시작" Command="{Binding StartWebcamCommand}" Margin="5"/>
             <Button Content="웹캠 정지" Command="{Binding StopWebcamCommand}" Margin="5"/>
