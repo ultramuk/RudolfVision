@@ -110,7 +110,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Users\MUKS\source\repos\RudolfVision\3rdparty\opencv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\MUKS\source\repos\RudolfVision\RudolfLib;C:\Users\MUKS\source\repos\RudolfVision\RudolfLib\include;C:\Users\MUKS\source\repos\RudolfVision\3rdparty\opencv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -140,7 +140,7 @@ xcopy /Y /D "$(SolutionDir)RudolfLib\Assets\rudolf_nose.png" "$(SolutionDir)Rudo
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Users\MUKS\source\repos\RudolfVision\3rdparty\opencv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\MUKS\source\repos\RudolfVision\RudolfLib;C:\Users\MUKS\source\repos\RudolfVision\RudolfLib\include;C:\Users\MUKS\source\repos\RudolfVision\3rdparty\opencv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -152,8 +152,9 @@ xcopy /Y /D "$(SolutionDir)RudolfLib\Assets\rudolf_nose.png" "$(SolutionDir)Rudo
     <PostBuildEvent>
       <Command>xcopy /Y /D "$(TargetPath)" "$(SolutionDir)RudolfApp\bin\$(Configuration)\net8.0-windows\"
 xcopy /Y /D "$(SolutionDir)3rdparty\opencv\x64\vc15\bin\*.dll" "$(SolutionDir)RudolfApp\bin\$(Configuration)\net8.0-windows\"
-xcopy /Y /D "$(SolutionDir)RudolfLib\Assets\haarcascade_frontalface_default.xml" "$(SolutionDir)RudolfApp\bin\$(Configuration)\net8.0-windows\"
-xcopy /Y /D "$(SolutionDir)RudolfLib\Assets\rudolf_nose.png" "$(SolutionDir)RudolfApp\bin\$(Configuration)\net8.0-windows\"</Command>
+xcopy /Y /D "$(SolutionDir)RudolfLib\Assets\haarcascade_frontalface_default.xml" "$(SolutionDir)RudolfApp\bin\$(Configuration)\net8.0-windows\Assets\"
+xcopy /Y /D "$(SolutionDir)RudolfLib\Assets\rudolf_nose.png" "$(SolutionDir)RudolfApp\bin\$(Configuration)\net8.0-windows\Assets\"
+xcopy /Y /D "$(SolutionDir)RudolfLib\Assets\shape_predictor_68_face_landmarks.dat" "$(SolutionDir)RudolfApp\bin\$(Configuration)\net8.0-windows\Assets\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>
@@ -161,19 +162,23 @@ xcopy /Y /D "$(SolutionDir)RudolfLib\Assets\rudolf_nose.png" "$(SolutionDir)Rudo
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h" />
+    <ClInclude Include="include\RudolfLib.h" />
+    <ClInclude Include="src\framework.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="RudolfLib.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    <ClCompile Include="dlib\all\source.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="RudolfLib.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\dllmain.cpp">
+      <PrecompiledHeader>Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\RudolfLib.cpp">
+      <PrecompiledHeader>Use</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
