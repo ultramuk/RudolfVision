@@ -24,6 +24,9 @@
     <ClInclude Include="include\RudolfLib.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="include\RudolfProcessor.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp">
@@ -35,8 +38,11 @@
     <ClCompile Include="src\RudolfLib.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="CMakeLists.txt" />
+    <ClCompile Include="dlib\all\source.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RudolfProcessor.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

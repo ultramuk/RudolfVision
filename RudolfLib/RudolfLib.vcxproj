@@ -163,6 +163,7 @@ xcopy /Y /D "$(SolutionDir)RudolfLib\Assets\shape_predictor_68_face_landmarks.da
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\RudolfLib.h" />
+    <ClInclude Include="include\RudolfProcessor.h" />
     <ClInclude Include="src\framework.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
@@ -179,6 +180,7 @@ xcopy /Y /D "$(SolutionDir)RudolfLib\Assets\shape_predictor_68_face_landmarks.da
     <ClCompile Include="src\RudolfLib.cpp">
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\RudolfProcessor.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
