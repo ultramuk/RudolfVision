@@ -46,21 +46,23 @@ RudolfVision/
 
 ```
 
-## How to Run
+## 실행 파일 다운로드 및 실행 방법
 
-### 1. 실행 파일 위치로 이동
-아래 폴더로 이동합니다
-`RudolfVision/RudolfAPP/bin/Release/net8.0-windows`
+### 1. 실행파일 다운로드
 
-### 2. 프로그램 실행
-**`RudolfApp.exe`**. 파일을 더블 클릭하여 실행합니다
+실행 파일이 포함된 패키지는 아래 링크에서 다운로드할 수 있습니다:
 
-### 3. 사용 가능한 기능:
-- **이미지 불러오기**: 정적 이미지에서 얼굴 인식 수행
-- **웹캠 시작**: 실시간 영상에서 얼굴 인식
+[RudolfVision 실행 파일 다운로드 (Google Drive)](https://drive.google.com/file/d/18sAc5CTCjf24uFaZz3wmZnW2HUblQ2bt/view?usp=sharing)
 
-### 4. 인식된 코 위치에 붉은 원이 표시됩니다 (루돌프 효과).
+> 압축파일(`RudolfVision-Release.zip`)에는 실행에 필요한 모든 파일이 포함되어 있습니다.
 
+### 2. 압축 해제 및 실행
+
+1. 다운로드한 `.zip` 파일을 원하는 위치에 압축 해제합니다.
+2. `RudolfApp.exe` 파일을 더블 클릭하여 실행합니다.
+3. 다음 기능을 사용할 수 있습니다:
+   - **이미지 불러오기**: 이미지에서 얼굴 인식 후 코에 빨간 원 표시
+   - **웹캠 시작**: 실시간 얼굴 인식 후 코에 빨간 원 표시
 ---
 
 ## System Requirements
