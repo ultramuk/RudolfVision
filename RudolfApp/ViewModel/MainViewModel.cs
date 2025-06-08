@@ -28,21 +28,6 @@ namespace RudolfApp.ViewModel
             }
         }
 
-        private string _customImagePath;
-        public string CustomImagePath
-        {
-            get => _customImagePath;
-            set
-            {
-                if (_customImagePath != value)
-                {
-                    _customImagePath = value;
-                    OnPropertyChanged(nameof(CustomImagePath));
-                }
-            }
-        }
-
-        public ICommand LoadSampleCommand { get; }
         public ICommand LoadFromFileCommand { get; }
         public ICommand StartWebcamCommand { get; }
         public ICommand StopWebcamCommand { get; }
@@ -62,16 +47,11 @@ namespace RudolfApp.ViewModel
                 });
             };
 
-            LoadSampleCommand = new AsyncRelayCommand(LoadSampleImageAsync);
             LoadFromFileCommand = new AsyncRelayCommand(LoadFromFileAsync);
             StartWebcamCommand = new RelayCommand(_ => _webcamService.Start());
             StopWebcamCommand = new AsyncRelayCommand(_webcamService.StopAsync);
         }
 
-        private async Task LoadSampleImageAsync()
-        {
-            await LoadImageAsync(Path.Combine(AppContext.BaseDirectory, "Assets", "sample.png"));
-        }
         private async Task LoadFromFileAsync()
         {
             var dialog = new OpenFileDialog
