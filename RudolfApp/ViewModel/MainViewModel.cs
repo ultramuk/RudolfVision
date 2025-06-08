@@ -8,6 +8,7 @@ using OpenCvSharp;
 using RudolfApp.Utils;
 using RudolfApp.Services.Interop;
 using System.Windows;
+using Microsoft.Win32;
 
 namespace RudolfApp.ViewModel
 {
@@ -42,7 +43,7 @@ namespace RudolfApp.ViewModel
         }
 
         public ICommand LoadSampleCommand { get; }
-        public ICommand LoadCustomImageCommand { get; }
+        public ICommand LoadFromFileCommand { get; }
         public ICommand StartWebcamCommand { get; }
         public ICommand StopWebcamCommand { get; }
 
@@ -62,7 +63,7 @@ namespace RudolfApp.ViewModel
             };
 
             LoadSampleCommand = new AsyncRelayCommand(LoadSampleImageAsync);
-            LoadCustomImageCommand = new AsyncRelayCommand(LoadCustomImageAsync);
+            LoadFromFileCommand = new AsyncRelayCommand(LoadFromFileAsync);
             StartWebcamCommand = new RelayCommand(_ => _webcamService.Start());
             StopWebcamCommand = new AsyncRelayCommand(_webcamService.StopAsync);
         }
@@ -71,15 +72,18 @@ namespace RudolfApp.ViewModel
         {
             await LoadImageAsync(Path.Combine(AppContext.BaseDirectory, "Assets", "sample.png"));
         }
-        private async Task LoadCustomImageAsync()
+        private async Task LoadFromFileAsync()
         {
-            if (string.IsNullOrWhiteSpace(CustomImagePath) || !File.Exists(CustomImagePath))
+            var dialog = new OpenFileDialog
             {
-                MessageBox.Show("유효한 이미지 경로를 입력하세오.", "오류", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+                Title = "이미지 파일 선택",
+                Filter = "이미지 파일 (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp"
+            };
 
-            await LoadImageAsync(CustomImagePath);
+            if (dialog.ShowDialog() == true)
+            {
+                await LoadImageAsync(dialog.FileName);
+            }
         }
 
         private async Task LoadImageAsync(string imagePath)
@@ -111,7 +115,6 @@ namespace RudolfApp.ViewModel
                 Console.WriteLine("이미지 로딩 실패: " + ex.Message);
             }
         }
-
 
         public async Task CleanupAsync()
         {
