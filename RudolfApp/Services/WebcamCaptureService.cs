@@ -11,11 +11,11 @@ namespace RudolfApp.Services
 {
     public class WebcamCaptureService
     {
-        private VideoCapture _capture;
-        private CancellationTokenSource _cts;
-        private Task _captureTask;
+        private VideoCapture? _capture;
+        private CancellationTokenSource? _cts;
+        private Task? _captureTask;
 
-        public Action<ImageSource> OnFrameReady;
+        public Action<ImageSource>? OnFrameReady;
 
         private bool _isRunning = false;
 

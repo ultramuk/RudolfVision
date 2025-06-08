@@ -15,7 +15,7 @@ namespace RudolfApp.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private ImageSource _inputImage;
+        private ImageSource _inputImage = null!;
         public ImageSource InputImage
         {
             get => _inputImage;
@@ -48,9 +48,9 @@ namespace RudolfApp.ViewModel
                 });
             };
 
-            LoadFromFileCommand = new AsyncRelayCommand(LoadFromFileAsync);
+            LoadFromFileCommand = new AsyncRelayCommand(_ => LoadFromFileAsync());
             StartWebcamCommand = new RelayCommand(_ => _webcamCaptureService.Start());
-            StopWebcamCommand = new AsyncRelayCommand(_webcamCaptureService.StopAsync);
+            StopWebcamCommand = new AsyncRelayCommand(_ => _webcamCaptureService.StopAsync());
         }
 
         private async Task LoadFromFileAsync()
@@ -103,7 +103,7 @@ namespace RudolfApp.ViewModel
             RudolfInterop.Release();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

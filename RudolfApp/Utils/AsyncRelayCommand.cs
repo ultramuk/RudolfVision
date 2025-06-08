@@ -6,22 +6,25 @@ namespace RudolfApp.Utils
 {
     public class AsyncRelayCommand : ICommand
     {
-        private readonly Func<Task> _execute;
-        private readonly Func<bool> _canExecute;
+        private readonly Func<object?, Task> _executeAsync;
+        private readonly Predicate<object?>? _canExecute;
 
-        public AsyncRelayCommand(Func<Task> execute, Func<bool> canExecute = null)
+        public AsyncRelayCommand(Func<object?, Task> executeAsync, Predicate<object?>? canExecute = null)
         {
-            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            _canExecute = canExecute ?? (() => true);
+            _executeAsync = executeAsync ?? throw new ArgumentNullException(nameof(executeAsync));
+            _canExecute = canExecute;
         }
 
-        public bool CanExecute(object parameter) => _canExecute();
+        public bool CanExecute(object? parameter)
+        {
+            return _canExecute == null || _canExecute(parameter);
+        }
 
-        public async void Execute(object parameter)
+        public async void Execute(object? parameter)
         {
             try
             {
-                await _execute();
+                await _executeAsync(parameter);
             }
             catch (Exception ex)
             {
@@ -29,9 +32,11 @@ namespace RudolfApp.Utils
             }
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
 
         public void RaiseCanExecuteChanged()
-            => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
