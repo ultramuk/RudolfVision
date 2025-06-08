@@ -56,7 +56,7 @@ void Initialize() {
         std::cerr << "landmark 모델 로드 실패: " << e.what() << std::endl;
     }
 
-    nose_overlay = cv::imread("rudolf_nose.png", cv::IMREAD_UNCHANGED); // 4채널 PNG
+    nose_overlay = cv::imread("Assets/rudolf_nose.png", cv::IMREAD_UNCHANGED); // 4채널 PNG
     if (nose_overlay.empty()) {
         std::cerr << "루돌프 코 이미지 로드 실패" << std::endl;
     }

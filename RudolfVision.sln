@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3rdparty", "3rdparty", "{C8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "opencv", "opencv", "{09484B69-D908-4476-A88C-375F19F9AA91}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RudolfLib", "RudolfLib\RudolfLib\RudolfLib.vcxproj", "{4FA1D524-FEB9-47A7-A2FE-1088ECFE3848}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RudolfLib", "RudolfLib\RudolfLib.vcxproj", "{4FA1D524-FEB9-47A7-A2FE-1088ECFE3848}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
