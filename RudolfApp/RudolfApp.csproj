@@ -45,4 +45,8 @@
     </None>
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if not exist &quot;$(SolutionDir)RudolfVision-Release&quot; mkdir &quot;$(SolutionDir)RudolfVision-Release&quot; &amp;&amp; xcopy /Y /D &quot;$(SolutionDir)RudolfApp\bin\Release\net8.0-windows\RudolfLib.dll&quot; &quot;$(SolutionDir)RudolfVision-Release\&quot; &amp;&amp; xcopy /Y /D &quot;$(SolutionDir)RudolfApp\bin\Release\net8.0-windows\RudolfLib.exe&quot; &quot;$(SolutionDir)RudolfVision-Release\&quot; &amp;&amp; xcopy /Y /D &quot;$(SolutionDir)3rdparty\opencv\x64\vc15\bin\*.dll&quot; &quot;$(SolutionDir)RudolfVision-Release\&quot; &amp;&amp; xcopy /Y /D &quot;$(SolutionDir)RudolfLib\bin\Release\net8.0-windows\Assert\*&quot; &quot;$(SolutionDir)RudolfVision-Release\&quot;" />
+  </Target>
+
 </Project>
