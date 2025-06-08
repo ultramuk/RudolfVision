@@ -7,9 +7,15 @@ using System.Windows;
 
 namespace RudolfApp.Model
 {
-    internal class FaceResult
+    public class FaceResult
     {
         public Rect FaceBox { get; set; }
         public Point NosePosition { get; set; }
+    
+        public FaceResult()
+        {
+            FaceBox = new Rect();
+            NosePosition = new Point();
+        }
     }
 }
