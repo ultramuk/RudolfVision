@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using OpenCvSharp;
 using RudolfApp.Utils;
+using RudolfApp.Services;
 using RudolfApp.Services.Interop;
 using System.Windows;
 using Microsoft.Win32;
@@ -32,14 +33,14 @@ namespace RudolfApp.ViewModel
         public ICommand StartWebcamCommand { get; }
         public ICommand StopWebcamCommand { get; }
 
-        private readonly WebcamService _webcamService;
+        private readonly WebcamCaptureService _webcamCaptureService;
 
         public MainViewModel()
         {
             RudolfInterop.Initialize();
 
-            _webcamService = new WebcamService();
-            _webcamService.OnFrameReceived = image =>
+            _webcamCaptureService = new WebcamCaptureService();
+            _webcamCaptureService.OnFrameReady = image =>
             {
                 System.Windows.Application.Current.Dispatcher.Invoke(() =>
                 {
@@ -48,8 +49,8 @@ namespace RudolfApp.ViewModel
             };
 
             LoadFromFileCommand = new AsyncRelayCommand(LoadFromFileAsync);
-            StartWebcamCommand = new RelayCommand(_ => _webcamService.Start());
-            StopWebcamCommand = new AsyncRelayCommand(_webcamService.StopAsync);
+            StartWebcamCommand = new RelayCommand(_ => _webcamCaptureService.Start());
+            StopWebcamCommand = new AsyncRelayCommand(_webcamCaptureService.StopAsync);
         }
 
         private async Task LoadFromFileAsync()
@@ -70,7 +71,7 @@ namespace RudolfApp.ViewModel
         {
             try
             {
-                await _webcamService.StopAsync();
+                await _webcamCaptureService.StopAsync();
 
                 if (!File.Exists(imagePath))
                 {
@@ -98,7 +99,7 @@ namespace RudolfApp.ViewModel
 
         public async Task CleanupAsync()
         {
-            await _webcamService.StopAsync();
+            await _webcamCaptureService.StopAsync();
             RudolfInterop.Release();
         }
 

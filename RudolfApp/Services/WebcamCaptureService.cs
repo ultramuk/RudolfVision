@@ -1,21 +1,21 @@
-﻿using OpenCvSharp;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using OpenCvSharp;
 using RudolfApp.Services.Interop;
 
-namespace RudolfApp.Utils
+namespace RudolfApp.Services
 {
-    public class WebcamService
+    public class WebcamCaptureService
     {
         private VideoCapture _capture;
         private CancellationTokenSource _cts;
         private Task _captureTask;
 
-        public Action<ImageSource> OnFrameReceived;
+        public Action<ImageSource> OnFrameReady;
 
         private bool _isRunning = false;
 
@@ -69,7 +69,7 @@ namespace RudolfApp.Utils
                                         (int)(matCopy.Step() * matCopy.Height),
                                         (int)(matCopy.Step()));
 
-                                    OnFrameReceived?.Invoke(bitmap);
+                                    OnFrameReady?.Invoke(bitmap);
                                 }
                                 catch (Exception ex)
                                 {
