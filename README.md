@@ -1,68 +1,76 @@
 # RudolfVision - Face Detection with Rudolph Nose Effect
 
-·çµ¹ÇÁÃ³·³ ¾ó±¼ ÀÎ½Ä ÈÄ ÄÚ¿¡ »¡°£ ¿øÀ» ÇÕ¼ºÇØÁÖ´Â Windows ±â¹Ý ¾ó±¼ ÀÎ½Ä ¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÔ´Ï´Ù.  
-À¥Ä· ¶Ç´Â ÀÌ¹ÌÁö ÀÔ·ÂÀ» ÅëÇØ ¾ó±¼À» ½Ç½Ã°£À¸·Î ÀÎ½ÄÇÏ°í, dlib landmark¸¦ ±â¹ÝÀ¸·Î ÄÚ À§Ä¡¿¡ ¿øÀ» Ç¥½ÃÇÕ´Ï´Ù.
+ë£¨ëŒí”„ì²˜ëŸ¼ ì–¼êµ´ ì¸ì‹ í›„ ì½”ì— ë¹¨ê°„ ì›ì„ í•©ì„±í•´ì£¼ëŠ” Windows ê¸°ë°˜ ì–¼êµ´ ì¸ì‹ ì• í”Œë¦¬ì¼€ì´ì…˜ìž…ë‹ˆë‹¤.  
+ì›¹ìº  ë˜ëŠ” ì´ë¯¸ì§€ ìž…ë ¥ì„ í†µí•´ ì–¼êµ´ì„ ì‹¤ì‹œê°„ìœ¼ë¡œ ì¸ì‹í•˜ê³ , dlib landmarkë¥¼ ê¸°ë°˜ìœ¼ë¡œ ì½” ìœ„ì¹˜ì— ì›ì„ í‘œì‹œí•©ë‹ˆë‹¤.
+
+---
+## Result
+### Webcam
+https://github.com/user-attachments/assets/56c8bc6d-1704-44f3-b7d6-d54182c0b0c0
+
+### Image load
+![2](https://github.com/user-attachments/assets/785361b4-6760-4fd7-b646-7db21e6fa9fa)
 
 ---
 
 ## Folder Structure
 ```
 RudolfVision/
-¦§¦¡¦¡ RudolfApp/                       # C# WPF ¾ÖÇÃ¸®ÄÉÀÌ¼Ç
-¦¢   ¦§¦¡¦¡ View/                        # XAML UI
-¦¢   ¦§¦¡¦¡ ViewModel/                  # MVVM ViewModel
-¦¢   ¦§¦¡¦¡ Model/                      # ¾ó±¼ ÀÎ½Ä °á°ú ¸ðµ¨
-¦¢   ¦§¦¡¦¡ Services/                   # À¥Ä· Ã³¸® ¼­ºñ½º
-¦¢   ¦§¦¡¦¡ Utils/                      # RelayCommand µî À¯Æ¿¸®Æ¼
-¦¢   ¦§¦¡¦¡ Assets/                     # UI ¸®¼Ò½º (¿¹: sample.png)
-¦¢   ¦¦¦¡¦¡ bin/
-¦¢       ¦¦¦¡¦¡ Release/
-¦¢           ¦¦¦¡¦¡ net8.0-windows/     # ÃÖÁ¾ ¹èÆ÷ ÆÄÀÏ À§Ä¡
-¦¢               ¦§¦¡¦¡ RudolfApp.exe
-¦¢               ¦§¦¡¦¡ RudolfLib.dll
-¦¢               ¦§¦¡¦¡ opencv_world455.dll
-¦¢               ¦§¦¡¦¡ haarcascade_frontalface_default.xml
-¦¢               ¦§¦¡¦¡ rudolf_nose.png
-¦¢               ¦§¦¡¦¡ RudolfApp.runtimeconfig.json
-¦¢               ¦§¦¡¦¡ RudolfApp.deps.json
-¦¢               ¦¦¦¡¦¡ ±âÅ¸ ½ÇÇà °ü·Ã DLL ¹× ÆÄÀÏµé
+â”œâ”€â”€ RudolfApp/                       # C# WPF ì• í”Œë¦¬ì¼€ì´ì…˜
+â”‚   â”œâ”€â”€ View/                        # XAML UI
+â”‚   â”œâ”€â”€ ViewModel/                  # MVVM ViewModel
+â”‚   â”œâ”€â”€ Model/                      # ì–¼êµ´ ì¸ì‹ ê²°ê³¼ ëª¨ë¸
+â”‚   â”œâ”€â”€ Services/                   # ì›¹ìº  ì²˜ë¦¬ ì„œë¹„ìŠ¤
+â”‚   â”œâ”€â”€ Utils/                      # RelayCommand ë“± ìœ í‹¸ë¦¬í‹°
+â”‚   â”œâ”€â”€ Assets/                     # UI ë¦¬ì†ŒìŠ¤ (ì˜ˆ: sample.png)
+â”‚   â””â”€â”€ bin/
+â”‚       â””â”€â”€ Release/
+â”‚           â””â”€â”€ net8.0-windows/     # ìµœì¢… ë°°í¬ íŒŒì¼ ìœ„ì¹˜
+â”‚               â”œâ”€â”€ RudolfApp.exe
+â”‚               â”œâ”€â”€ RudolfLib.dll
+â”‚               â”œâ”€â”€ opencv_world455.dll
+â”‚               â”œâ”€â”€ haarcascade_frontalface_default.xml
+â”‚               â”œâ”€â”€ rudolf_nose.png
+â”‚               â”œâ”€â”€ RudolfApp.runtimeconfig.json
+â”‚               â”œâ”€â”€ RudolfApp.deps.json
+â”‚               â””â”€â”€ ê¸°íƒ€ ì‹¤í–‰ ê´€ë ¨ DLL ë° íŒŒì¼ë“¤
 
-¦§¦¡¦¡ RudolfLib/                      # C++ ¾ó±¼ ÀÎ½Ä DLL ÇÁ·ÎÁ§Æ®
-¦¢   ¦§¦¡¦¡ include/                    # °ø°³ Çì´õ (RudolfLib.h)
-¦¢   ¦§¦¡¦¡ src/                        # ±¸Çö ÆÄÀÏ (RudolfLib.cpp, dllmain.cpp µî)
-¦¢   ¦§¦¡¦¡ Assert/                     # ¸®¼Ò½º ÆÄÀÏ (xml, png)
-¦¢   ¦¦¦¡¦¡ build/                      # CMake ºôµå °á°ú¹°
-¦¢       ¦¦¦¡¦¡ Release/
-¦¢           ¦¦¦¡¦¡ RudolfLib.dll
+â”œâ”€â”€ RudolfLib/                      # C++ ì–¼êµ´ ì¸ì‹ DLL í”„ë¡œì íŠ¸
+â”‚   â”œâ”€â”€ include/                    # ê³µê°œ í—¤ë” (RudolfLib.h)
+â”‚   â”œâ”€â”€ src/                        # êµ¬í˜„ íŒŒì¼ (RudolfLib.cpp, dllmain.cpp ë“±)
+â”‚   â”œâ”€â”€ Assert/                     # ë¦¬ì†ŒìŠ¤ íŒŒì¼ (xml, png)
+â”‚   â””â”€â”€ build/                      # CMake ë¹Œë“œ ê²°ê³¼ë¬¼
+â”‚       â””â”€â”€ Release/
+â”‚           â””â”€â”€ RudolfLib.dll
 
-¦§¦¡¦¡ 3rdparty/                       # ¿ÜºÎ ¶óÀÌºê·¯¸® ¼öµ¿ °ü¸®
-¦¢   ¦§¦¡¦¡ opencv/                     # OpenCV Windows¿ë ¹ÙÀÌ³Ê¸®
-¦¢   ¦¦¦¡¦¡ dlib/                       # dlib ¼Ò½º ¹× ºôµå
+â”œâ”€â”€ 3rdparty/                       # ì™¸ë¶€ ë¼ì´ë¸ŒëŸ¬ë¦¬ ìˆ˜ë™ ê´€ë¦¬
+â”‚   â”œâ”€â”€ opencv/                     # OpenCV Windowsìš© ë°”ì´ë„ˆë¦¬
+â”‚   â””â”€â”€ dlib/                       # dlib ì†ŒìŠ¤ ë° ë¹Œë“œ
 
-¦§¦¡¦¡ scripts/                        # (¼±ÅÃ) ºôµå ¹× ¹èÆ÷ ÀÚµ¿È­ ½ºÅ©¸³Æ®
-¦§¦¡¦¡ README.md                       # ½ÇÇà ¹æ¹ý ¾È³» ¹®¼­
-¦¦¦¡¦¡ CMakeLists.txt                  # RudolfLib¿ë CMake ¼³Á¤
+â”œâ”€â”€ scripts/                        # (ì„ íƒ) ë¹Œë“œ ë° ë°°í¬ ìžë™í™” ìŠ¤í¬ë¦½íŠ¸
+â”œâ”€â”€ README.md                       # ì‹¤í–‰ ë°©ë²• ì•ˆë‚´ ë¬¸ì„œ
+â””â”€â”€ CMakeLists.txt                  # RudolfLibìš© CMake ì„¤ì •
 
 
 ```
 
-## ½ÇÇà ÆÄÀÏ ´Ù¿î·Îµå ¹× ½ÇÇà ¹æ¹ý
+## ì‹¤í–‰ íŒŒì¼ ë‹¤ìš´ë¡œë“œ ë° ì‹¤í–‰ ë°©ë²•
 
-### 1. ½ÇÇàÆÄÀÏ ´Ù¿î·Îµå
+### 1. ì‹¤í–‰íŒŒì¼ ë‹¤ìš´ë¡œë“œ
 
-½ÇÇà ÆÄÀÏÀÌ Æ÷ÇÔµÈ ÆÐÅ°Áö´Â ¾Æ·¡ ¸µÅ©¿¡¼­ ´Ù¿î·ÎµåÇÒ ¼ö ÀÖ½À´Ï´Ù:
+ì‹¤í–‰ íŒŒì¼ì´ í¬í•¨ëœ íŒ¨í‚¤ì§€ëŠ” ì•„ëž˜ ë§í¬ì—ì„œ ë‹¤ìš´ë¡œë“œí•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤:
 
-[RudolfVision ½ÇÇà ÆÄÀÏ ´Ù¿î·Îµå (Google Drive)](https://drive.google.com/file/d/18sAc5CTCjf24uFaZz3wmZnW2HUblQ2bt/view?usp=sharing)
+[RudolfVision ì‹¤í–‰ íŒŒì¼ ë‹¤ìš´ë¡œë“œ (Google Drive)](https://drive.google.com/file/d/18sAc5CTCjf24uFaZz3wmZnW2HUblQ2bt/view?usp=sharing)
 
-> ¾ÐÃàÆÄÀÏ(`RudolfVision-Release.zip`)¿¡´Â ½ÇÇà¿¡ ÇÊ¿äÇÑ ¸ðµç ÆÄÀÏÀÌ Æ÷ÇÔµÇ¾î ÀÖ½À´Ï´Ù.
+> ì••ì¶•íŒŒì¼(`RudolfVision-Release.zip`)ì—ëŠ” ì‹¤í–‰ì— í•„ìš”í•œ ëª¨ë“  íŒŒì¼ì´ í¬í•¨ë˜ì–´ ìžˆìŠµë‹ˆë‹¤.
 
-### 2. ¾ÐÃà ÇØÁ¦ ¹× ½ÇÇà
+### 2. ì••ì¶• í•´ì œ ë° ì‹¤í–‰
 
-1. ´Ù¿î·ÎµåÇÑ `.zip` ÆÄÀÏÀ» ¿øÇÏ´Â À§Ä¡¿¡ ¾ÐÃà ÇØÁ¦ÇÕ´Ï´Ù.
-2. `RudolfApp.exe` ÆÄÀÏÀ» ´õºí Å¬¸¯ÇÏ¿© ½ÇÇàÇÕ´Ï´Ù.
-3. ´ÙÀ½ ±â´ÉÀ» »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù:
-   - **ÀÌ¹ÌÁö ºÒ·¯¿À±â**: ÀÌ¹ÌÁö¿¡¼­ ¾ó±¼ ÀÎ½Ä ÈÄ ÄÚ¿¡ »¡°£ ¿ø Ç¥½Ã
-   - **À¥Ä· ½ÃÀÛ**: ½Ç½Ã°£ ¾ó±¼ ÀÎ½Ä ÈÄ ÄÚ¿¡ »¡°£ ¿ø Ç¥½Ã
+1. ë‹¤ìš´ë¡œë“œí•œ `.zip` íŒŒì¼ì„ ì›í•˜ëŠ” ìœ„ì¹˜ì— ì••ì¶• í•´ì œí•©ë‹ˆë‹¤.
+2. `RudolfApp.exe` íŒŒì¼ì„ ë”ë¸” í´ë¦­í•˜ì—¬ ì‹¤í–‰í•©ë‹ˆë‹¤.
+3. ë‹¤ìŒ ê¸°ëŠ¥ì„ ì‚¬ìš©í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤:
+   - **ì´ë¯¸ì§€ ë¶ˆëŸ¬ì˜¤ê¸°**: ì´ë¯¸ì§€ì—ì„œ ì–¼êµ´ ì¸ì‹ í›„ ì½”ì— ë¹¨ê°„ ì› í‘œì‹œ
+   - **ì›¹ìº  ì‹œìž‘**: ì‹¤ì‹œê°„ ì–¼êµ´ ì¸ì‹ í›„ ì½”ì— ë¹¨ê°„ ì› í‘œì‹œ
 ---
 
 ## System Requirements
@@ -86,5 +94,5 @@ RudolfVision/
 
 ## License
 
-- º» ÇÁ·ÎÁ§Æ®´Â ºñ»ó¾÷Àû °úÁ¦ Á¦Ãâ ¹× ÇÐ½À¿ëÀ¸·Î ÀÛ¼ºµÇ¾ú½À´Ï´Ù.
-- OpenCV ¹× dlib´Â °¢ ¶óÀÌºê·¯¸®ÀÇ ¶óÀÌ¼±½º¸¦ µû¸¨´Ï´Ù.
+- ë³¸ í”„ë¡œì íŠ¸ëŠ” ë¹„ìƒì—…ì  ê³¼ì œ ì œì¶œ ë° í•™ìŠµìš©ìœ¼ë¡œ ìž‘ì„±ë˜ì—ˆìŠµë‹ˆë‹¤.
+- OpenCV ë° dlibëŠ” ê° ë¼ì´ë¸ŒëŸ¬ë¦¬ì˜ ë¼ì´ì„ ìŠ¤ë¥¼ ë”°ë¦…ë‹ˆë‹¤.
